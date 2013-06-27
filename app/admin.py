@@ -2,7 +2,7 @@ from datetime import date
 from django.contrib import admin
 from django import forms
 from django.contrib.admin import SimpleListFilter
-from django.utils.html import format_html
+from django.utils.html import escape
 from app.models import *
 
 class CalendarAdmin(admin.ModelAdmin):
@@ -67,7 +67,7 @@ class ActivityAdmin(admin.ModelAdmin):
         if not ans:
             ans = 'Content is empty.'
         else:
-            ans = '<a href="' + str(obj.id) + '/" title="' + format_html(obj.content) + '">' + format_html(ans) + '</a>'
+            ans = '<a href="' + str(obj.id) + '/" title="' + escape(obj.content) + '">' + escape(ans) + '</a>'
         return ans
     abstract.allow_tags = True
 
