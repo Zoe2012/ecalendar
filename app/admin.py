@@ -39,7 +39,7 @@ class ActivityAdmin(admin.ModelAdmin):
     list_display = ('title', 'abstract', 'location', 'weight', 'public', 'city', 'origin', 'start_date', 'start_time', 'end_date')
     list_display_links = ('abstract',)
     list_editable = ('weight', 'title', 'location')
-    list_filter = (OutdatedListFilter, 'public', 'city', 'start_date', 'end_date', 'tags', 'source',)
+    list_filter = ('public', 'source', 'tags', OutdatedListFilter, 'start_date', 'end_date', 'city')
     search_fields = ['title', 'content']
     ordering = ('-start_date', '-start_time', '-weight')
     actions = ['make_public', 'make_private', 'recrawl']
