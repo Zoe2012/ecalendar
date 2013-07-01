@@ -42,13 +42,10 @@ class Bot(object):
             time.sleep(self.interval)
 
     def get_tree(self, url):
-        try:
-            print '-'*100 + '\n' + url.url
-            #url.status = 'i'
-            page = self.opener.open(url.url).read().decode(self.encoding)
-            return etree.HTML(page)
-        except Exception, e:
-            print e
+        print '-'*100 + '\n' + url.url
+        #url.status = 'i'
+        page = self.opener.open(url.url).read().decode(self.encoding)
+        return etree.HTML(page)
 
     def scrap(self, url):
         pass
@@ -94,8 +91,6 @@ class HeadinBot(Bot):
     def scrap(self, url):
         crawl_start_time = datetime.datetime.now()
         tree = self.get_tree(url)
-        if tree is None:
-            return
 
         title = tree.xpath(self.xpaths['title'])[0].strip()
         try:
@@ -164,8 +159,6 @@ class WeiboBot(Bot):
     def scrap(self, url):
         crawl_start_time = datetime.datetime.now()
         tree = self.get_tree(url)
-        if tree is None:
-            return
 
         title = tree.xpath(self.xpaths['title'])[0].strip()
         print 'get title = ', title
@@ -256,8 +249,6 @@ class DamaiBot(Bot):
     def scrap(self, url):
         crawl_start_time = datetime.datetime.now()
         tree = self.get_tree(url)
-        if tree is None:
-            return
 
         title = tree.xpath(self.xpaths['title'])[0].strip()
         print 'get title = ', title
