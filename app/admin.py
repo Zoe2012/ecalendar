@@ -36,21 +36,21 @@ class OutdatedListFilter(SimpleListFilter):
 
 class ActivityAdmin(admin.ModelAdmin):
     form = ActivityForm
-    list_display = ('title', 'abstract', 'location', 'weight', 'public', 'city', 'origin', 'start_date', 'start_time', 'end_date')
+    list_display = ('title', 'abstract', 'location', 'weight', 'status', 'city', 'origin', 'start_date', 'start_time', 'end_date')
     list_display_links = ('abstract',)
     list_editable = ('weight', 'title', 'location')
-    list_filter = ('public', 'source', 'tags', OutdatedListFilter, 'start_date', 'end_date', 'city')
+    list_filter = ('status', 'source', 'tags', OutdatedListFilter, 'start_date', 'end_date', 'city')
     search_fields = ['title', 'content']
     ordering = ('-start_date', '-start_time', '-weight')
-    actions = ['make_public', 'make_private', 'recrawl']
+    actions = ['make_public', 'make_useless', 'recrawl']
 
     def make_public(self, request, queryset):
-        queryset.update(public=True)
+        queryset.update(status=1)
     make_public.short_description = 'Mark selected as public'
 
-    def make_private(self, request, queryset):
-        queryset.update(public=False)
-    make_private.short_description = 'Mark selected as private'
+    def make_useless(self, request, queryset):
+        queryset.update(status=3)
+    make_useless.short_description = 'Mark selected as useless'
 
     def recrawl(self, request, queryset):
         for obj in queryset:

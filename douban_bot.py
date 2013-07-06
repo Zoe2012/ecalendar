@@ -86,10 +86,11 @@ class DoubanBot(object):
             except:
                 activity = Activity()
             
+            status = 0
             print 'title = ', event['title']
             if self.in_balcklist(event['title']):
                 print 'This event is in blacklist'
-                return
+                status = 2
 
             activity.title = event['title']
             activity.content = event['content']
@@ -101,7 +102,7 @@ class DoubanBot(object):
             activity.url = event['alt']
             activity.city = city
             activity.weight = 70 + random.randint(0,10)
-            activity.public = 0
+            activity.status = status
             activity.source = u'豆瓣'
             activity.save()
 

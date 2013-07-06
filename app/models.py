@@ -1,3 +1,4 @@
+#encoding=utf-8
 from django.db import models
 
 class Calendar(models.Model):
@@ -47,7 +48,14 @@ class Activity(models.Model):
     end_time = models.TimeField(blank=True, null=True)
 
     weight = models.IntegerField(blank=True, null=True)
-    public = models.BooleanField(default=True)
+    
+    PROCESS_STATE = (
+        (0, 'new'), # bot 新添加的活动，未审核、不可见状态
+        (1, 'public'), # 公开的，已审核，对用户可见，其它所有非public状态都对用户不可见
+        (2, 'block'), # 被黑名规则单自动block的数据，不删除这些数据，可能被人工改为public或useless状态
+        (3, 'useless'), # 垃圾数据不删除，而是标记为useless，表示已审核但没通过
+    )
+    status = models.SmallIntegerField(choices=PROCESS_STATE, default=0)
 
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)

@@ -119,7 +119,7 @@ class HeadinBot(Bot):
 
         source = u'海丁'
         weight = 75 + random.randint(0,10)
-        public = 0
+        status = 0
         try:
             activity = Activity.objects.get(url=url.url, start_date=start_date)
         except:
@@ -133,7 +133,7 @@ class HeadinBot(Bot):
         activity.url = url.url
         activity.city = city
         activity.weight = weight
-        activity.public = public
+        activity.status = status
         activity.source = source
         activity.save()
 
@@ -201,7 +201,7 @@ class WeiboBot(Bot):
 
         source = u'新浪微博'
         weight = 60 + random.randint(0,10)
-        public = 0
+        status = 0
 
         try:
             activity = Activity.objects.get(url=url.url, start_date=start_date)
@@ -219,7 +219,7 @@ class WeiboBot(Bot):
         activity.url = url.url
         activity.city = city
         activity.weight = weight
-        activity.public = public
+        activity.status = status
         activity.source = source
         activity.save()
 
@@ -274,7 +274,7 @@ class DamaiBot(Bot):
 
         source = u'大麦'
         weight = 75 + random.randint(0,10)
-        public = 0
+        status = 0
 
         try:
             activity = Activity.objects.get(url=url.url, start_date=start_date)
@@ -290,7 +290,7 @@ class DamaiBot(Bot):
         activity.url = url.url
         activity.city = city
         activity.weight = weight
-        activity.public = public
+        activity.status = status
         activity.source = source
         activity.save()
 
@@ -333,7 +333,7 @@ class DoubanBot(Bot):
         print 'city = ', city, 'city_id = ', city.id
 
         weight = 60 + random.randint(0,10)
-        public = False
+        status = 0
         source = '豆瓣'
 
         try:
@@ -351,7 +351,7 @@ class DoubanBot(Bot):
         activity.url = url.url
         activity.city = city
         activity.weight = weight
-        activity.public = public
+        activity.status = status
         activity.source = source
         activity.save()
 
